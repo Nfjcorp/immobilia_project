@@ -111,41 +111,50 @@ class _CartState extends State<Cart> {
               ),
             ),
           ),
-          Expanded(
-            flex: 6,
-            child: Container(
-              decoration: BoxDecoration(
-                color: whiteColor,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(40),
-                  topRight: Radius.circular(40),
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: blackColor.withOpacity(0.6),
-                    spreadRadius: 2,
-                    blurRadius: 8,
-                    offset: Offset(3, 3),
+          DraggableScrollableSheet(
+            initialChildSize: 0.4,
+            minChildSize: 0.4,
+            maxChildSize: 0.6,
+            builder:
+                (context, scrollController) => Container(
+                  decoration: BoxDecoration(
+                    color: whiteColor,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(40),
+                      topRight: Radius.circular(40),
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: blackColor.withOpacity(0.6),
+                        spreadRadius: 2,
+                        blurRadius: 8,
+                        offset: Offset(3, 3),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-              child: Padding(
-                padding: EdgeInsets.all(40),
-                child: Column(
-                  children: [
-                    DetailPrice(itemText: 'Selected Items', price: '`200'),
-                    SizedBox(height: 10),
-                    DetailPrice(itemText: 'Shipping Fee', price: '`200'),
-                    SizedBox(height: 10),
-                    Divider(),
-                    SizedBox(height: 30),
-                    DetailPrice(itemText: 'Subtotal', price: '200'),
-                    Spacer(),
-                    ButtonCustom(text: 'Checkout', onTap: () {}),
-                  ],
+                  child: SingleChildScrollView(
+                    controller: scrollController,
+                    child: Padding(
+                      padding: EdgeInsets.all(40),
+                      child: Column(
+                        children: [
+                          DetailPrice(
+                            itemText: 'Selected Items',
+                            price: '`200',
+                          ),
+                          SizedBox(height: 10),
+                          DetailPrice(itemText: 'Shipping Fee', price: '`200'),
+                          SizedBox(height: 10),
+                          Divider(),
+                          SizedBox(height: 30),
+                          DetailPrice(itemText: 'Subtotal', price: '200'),
+                          Spacer(),
+                          ButtonCustom(text: 'Checkout', onTap: () {}),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-            ),
           ),
         ],
       ),

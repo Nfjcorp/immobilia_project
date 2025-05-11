@@ -14,6 +14,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final bool isTapped = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -131,7 +132,7 @@ class _HomeState extends State<Home> {
                                   ),
                                   child: Icon(
                                     size: 20,
-                                    Icons.favorite,
+                                    Icons.favorite_outline,
                                     color: whiteColor,
                                   ),
                                 ),

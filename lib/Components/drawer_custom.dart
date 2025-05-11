@@ -1,5 +1,7 @@
+import 'package:app_meuble/Components/my_drawer_title.dart';
 import 'package:app_meuble/core/utils/colors.dart';
 import 'package:app_meuble/views/home.dart';
+import 'package:app_meuble/views/settings.dart';
 import 'package:flutter/material.dart';
 
 class DrawerCustom extends StatelessWidget {
@@ -31,25 +33,28 @@ class DrawerCustom extends StatelessWidget {
                 ],
               ),
             ),
-            ListTile(
-              leading: Icon(Icons.home),
-              title: Text('Home'),
+            MyDrawerTitle(
+              icon: Icon(Icons.home),
+              text: 'Home',
               onTap: () {
+                Navigator.pop(context);
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => Home()),
                 );
-                Navigator.pop(context);
               },
             ),
-            ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Settings'),
+            MyDrawerTitle(
+              icon: Icon(Icons.settings),
+              text: 'Settings',
               onTap: () {
                 Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Settings()),
+                );
               },
             ),
-
             Spacer(),
             GestureDetector(
               onTap: () {},
@@ -61,14 +66,20 @@ class DrawerCustom extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                   color: redColor,
                 ),
-                child: Text(
-                  textAlign: TextAlign.center,
-                  'Déconnexion',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: whiteColor,
-                    fontWeight: FontWeight.bold,
-                  ),
+                child: Row(
+                  children: [
+                    Icon(color: whiteColor, Icons.logout_outlined),
+                    SizedBox(width: 8),
+                    Text(
+                      textAlign: TextAlign.center,
+                      'Déconnexion',
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: whiteColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
