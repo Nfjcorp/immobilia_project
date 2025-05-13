@@ -1,10 +1,13 @@
 import 'package:app_meuble/Components/app_builder.dart';
 import 'package:app_meuble/Components/drawer_custom.dart';
+import 'package:app_meuble/Providers/cart_provider.dart';
+import 'package:app_meuble/Providers/hello_provider.dart';
 import 'package:app_meuble/core/utils/colors.dart';
 import 'package:app_meuble/models/chair.dart';
 import 'package:app_meuble/views/cart.dart';
 import 'package:app_meuble/views/detail_page.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -17,6 +20,9 @@ class _HomeState extends State<Home> {
   final bool isTapped = false;
   @override
   Widget build(BuildContext context) {
+    //final provider = Provider.of<CartProvider>(context);
+    final provider = Provider.of<HelloProvider>(context);
+    final chaise = provider.chair;
     return Scaffold(
       backgroundColor: Colors.deepPurple[100],
       appBar: appBuilder(),
@@ -128,8 +134,16 @@ class _HomeState extends State<Home> {
                                   padding: EdgeInsets.all(5),
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
-                                    color: redColor,
+                                    color: Colors.red,
                                   ),
+                                  /* provider.isExist(Chair(
+                                      imageUrl: chaise['imageUrl'],
+                                      tag: chaise['tag'],
+                                      name: chaise['name'],
+                                      description: chaise['description'],
+                                      price: chaise['Price'],
+                                    )) ? kPrimaryColor : whiteColor,
+                                  ), */
                                   child: Icon(
                                     size: 20,
                                     Icons.favorite_outline,
@@ -167,13 +181,26 @@ class _HomeState extends State<Home> {
                                 ),
                               ),
                               Spacer(),
-                              Container(
-                                padding: EdgeInsets.all(5),
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: kPrimaryColor,
+                              GestureDetector(
+                                onTap: () {
+                                  provider.addItem(
+                                    Chair(
+                                      imageUrl: chaise['imageUrl'],
+                                      tag: chaise['tag'],
+                                      name: chaise['name'],
+                                      description: chaise['description'],
+                                      price: chaise['Price'],
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.all(5),
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: kPrimaryColor,
+                                  ),
+                                  child: Icon(Icons.add, color: whiteColor),
                                 ),
-                                child: Icon(Icons.add, color: whiteColor),
                               ),
                             ],
                           ),
